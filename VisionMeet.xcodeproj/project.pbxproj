@@ -12,6 +12,12 @@
 		F629082F2AB61E5E0050523B /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F629082E2AB61E5E0050523B /* DataManagementView.swift */; };
 		F62908332AB61E740050523B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62908322AB61E740050523B /* SettingsView.swift */; };
 		F62908372AB61F3F0050523B /* CreateARSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62908362AB61F3F0050523B /* CreateARSessionView.swift */; };
+		F629083A2AB6DB4B0050523B /* FileImporterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62908392AB6DB4B0050523B /* FileImporterType.swift */; };
+		F629083C2AB6DE4B0050523B /* ARSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F629083B2AB6DE4B0050523B /* ARSessionViewModel.swift */; };
+		F629083E2AB6DE700050523B /* ARModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F629083D2AB6DE700050523B /* ARModel.swift */; };
+		F62908402AB6DEF40050523B /* ARSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F629083F2AB6DEF40050523B /* ARSessionView.swift */; };
+		F62908422AB6DF1D0050523B /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62908412AB6DF1D0050523B /* ARViewContainer.swift */; };
+		F629084B2AB6EB150050523B /* SpeechRecognitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F629084A2AB6EB150050523B /* SpeechRecognitionHelper.swift */; };
 		F6B765782AB60E0A006F697F /* VisionMeetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B765772AB60E0A006F697F /* VisionMeetApp.swift */; };
 		F6B7657C2AB60E0B006F697F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6B7657B2AB60E0B006F697F /* Assets.xcassets */; };
 		F6B7657F2AB60E0B006F697F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6B7657E2AB60E0B006F697F /* Preview Assets.xcassets */; };
@@ -44,6 +50,12 @@
 		F629082E2AB61E5E0050523B /* DataManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementView.swift; sourceTree = "<group>"; };
 		F62908322AB61E740050523B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F62908362AB61F3F0050523B /* CreateARSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateARSessionView.swift; sourceTree = "<group>"; };
+		F62908392AB6DB4B0050523B /* FileImporterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileImporterType.swift; sourceTree = "<group>"; };
+		F629083B2AB6DE4B0050523B /* ARSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionViewModel.swift; sourceTree = "<group>"; };
+		F629083D2AB6DE700050523B /* ARModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModel.swift; sourceTree = "<group>"; };
+		F629083F2AB6DEF40050523B /* ARSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionView.swift; sourceTree = "<group>"; };
+		F62908412AB6DF1D0050523B /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
+		F629084A2AB6EB150050523B /* SpeechRecognitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionHelper.swift; sourceTree = "<group>"; };
 		F6B765742AB60E0A006F697F /* VisionMeet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisionMeet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6B765772AB60E0A006F697F /* VisionMeetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionMeetApp.swift; sourceTree = "<group>"; };
 		F6B7657B2AB60E0B006F697F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +144,8 @@
 		F62908342AB61F320050523B /* AR */ = {
 			isa = PBXGroup;
 			children = (
+				F62908452AB6E1D70050523B /* Helper */,
+				F62908382AB6DB410050523B /* Models */,
 				F62908352AB61F360050523B /* View */,
 			);
 			path = AR;
@@ -141,8 +155,28 @@
 			isa = PBXGroup;
 			children = (
 				F62908362AB61F3F0050523B /* CreateARSessionView.swift */,
+				F629083F2AB6DEF40050523B /* ARSessionView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F62908382AB6DB410050523B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F62908392AB6DB4B0050523B /* FileImporterType.swift */,
+				F629083B2AB6DE4B0050523B /* ARSessionViewModel.swift */,
+				F629083D2AB6DE700050523B /* ARModel.swift */,
+				F62908412AB6DF1D0050523B /* ARViewContainer.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F62908452AB6E1D70050523B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F629084A2AB6EB150050523B /* SpeechRecognitionHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		F6B7656B2AB60E0A006F697F = {
@@ -353,12 +387,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6B765782AB60E0A006F697F /* VisionMeetApp.swift in Sources */,
+				F629084B2AB6EB150050523B /* SpeechRecognitionHelper.swift in Sources */,
 				F62908372AB61F3F0050523B /* CreateARSessionView.swift in Sources */,
+				F629083C2AB6DE4B0050523B /* ARSessionViewModel.swift in Sources */,
 				F629082B2AB61A9E0050523B /* HomeView.swift in Sources */,
+				F629083E2AB6DE700050523B /* ARModel.swift in Sources */,
+				F62908422AB6DF1D0050523B /* ARViewContainer.swift in Sources */,
 				F6B765A42AB60EA1006F697F /* SplashView.swift in Sources */,
 				F62908332AB61E740050523B /* SettingsView.swift in Sources */,
+				F629083A2AB6DB4B0050523B /* FileImporterType.swift in Sources */,
 				F62908282AB619E20050523B /* TabManager.swift in Sources */,
 				F629082F2AB61E5E0050523B /* DataManagementView.swift in Sources */,
+				F62908402AB6DEF40050523B /* ARSessionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +565,8 @@
 				DEVELOPMENT_TEAM = H7245MHSUG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "AR세션 사용을 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "AR세션 내에서 대화를 위해 마이크 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -554,6 +596,8 @@
 				DEVELOPMENT_TEAM = H7245MHSUG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "AR세션 사용을 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "AR세션 내에서 대화를 위해 마이크 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

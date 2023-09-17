@@ -12,12 +12,18 @@ struct CreateARSessionView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var sessionName = ""
+    
     @State private var selectedItems = [PhotosPickerItem]()
     @State private var selectedFiles = [URL]()
+    @State private var selectedAudios = [URL]()
     @State private var selectedImages = [Data]()
+    
     @State private var showFilePicker = false
     @State private var showDuplicatedAlert = false
     @State private var showProgress = false
+    @State private var showSession = false
+    
+    @State private var importerType: FileImporterType? = nil
     
     private let userDefaults = UserDefaults.standard
     
@@ -72,7 +78,46 @@ struct CreateARSessionView: View {
                         }.frame(height: 150)
                     }
                     
-                    Spacer().frame(height: 20)
+                    Spacer().frame(height: 40)
+
+                    HStack{
+                        Text("음성 데이터")
+                            .foregroundStyle(Color.txt)
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            importerType = .AUDIO
+                            showFilePicker = true
+                        }){
+                            Image(systemName: "plus")
+                        }
+                    }
+                    
+                    if selectedAudios.isEmpty{
+                        Spacer().frame(height: 10)
+
+                        Text("음성 데이터를 불러오십시오.")
+                            .foregroundStyle(Color.gray)
+                    } else{
+                        ScrollView(.horizontal){
+                            LazyHStack{
+                                ForEach(selectedAudios, id: \.self){ file in
+                                    VStack(alignment: .leading){
+                                        Image(systemName: "waveform")
+                                            .foregroundStyle(Color.txt)
+                                        
+                                        Text(file.lastPathComponent)
+                                            .foregroundStyle(Color.txt)
+                                    }.padding(15)
+                                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15))
+                                }
+                            }.frame(height: 150)
+                        }
+                    }
+                    
+                    Spacer().frame(height: 40)
                     
                     HStack{
                         Text("화체 데이터")
@@ -82,6 +127,7 @@ struct CreateARSessionView: View {
                         Spacer()
                         
                         Button(action: {
+                            importerType = .TEXT
                             showFilePicker = true
                         }){
                             Image(systemName: "plus")
@@ -127,13 +173,15 @@ struct CreateARSessionView: View {
                                     showProgress = true
                                     let saveDict = [
                                         "images": selectedImages,
-                                        "files": selectedFiles
+                                        "files": selectedFiles,
+                                        "audios": selectedAudios
                                     ] as [String : Any]
                                     
                                     if userDefaults.object(forKey: "session_\(sessionName)") != nil{
                                         showDuplicatedAlert = true
                                     } else{
                                         userDefaults.set(saveDict, forKey: "session_\(sessionName)")
+                                        showSession = true
                                     }
                                     
                                     showProgress = false
@@ -152,7 +200,7 @@ struct CreateARSessionView: View {
                             }
                         }
                     }
-                    .fileImporter(isPresented: $showFilePicker, allowedContentTypes: [.text], allowsMultipleSelection: true, onCompletion: { result in
+                    .fileImporter(isPresented: $showFilePicker, allowedContentTypes: importerType == .TEXT ? [.text] : [.audio], allowsMultipleSelection: true, onCompletion: { result in
                         do{
                             let fileURL = try result.get()
                             
@@ -160,8 +208,10 @@ struct CreateARSessionView: View {
                                 let name = url.lastPathComponent
                                 let exts = name.components(separatedBy: ".")
                                 
-                                if exts[exts.count-1] == "txt"{
+                                if exts[exts.count-1] == "txt" && importerType == .TEXT{
                                     selectedFiles.append(url)
+                                } else if (exts[exts.count-1] == "wav" || exts[exts.count-1] == "mp3" || exts[exts.count-1] == "m4a") && (importerType == .AUDIO){
+                                    selectedAudios.append(url)
                                 }
                             }
 
@@ -171,6 +221,9 @@ struct CreateARSessionView: View {
                     })
                     .alert(isPresented: $showDuplicatedAlert, content: {
                         return Alert(title: Text("중복된 세션"), message: Text("동일한 이름의 세션이 이미 존재합니다."), dismissButton: .default(Text("확인")))
+                    })
+                    .fullScreenCover(isPresented: $showSession, content: {
+                        ARSessionView(sessionName: sessionName)
                     })
             }
         }

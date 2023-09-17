@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeView: View {
     @State private var showNewSessionView = false
     @State private var sessions = [String]()
+    @State private var showSession = false
+    @State private var selectedSession: String = ""
     
     private let userDefaults = UserDefaults.standard
     
@@ -27,21 +29,27 @@ struct HomeView: View {
                         
                         Spacer()
                     }
-
+                    
                     Spacer().frame(height: 20)
                     
                     ScrollView(.horizontal){
                         LazyHStack{
                             ForEach(sessions, id:\.self){session in
-                                VStack(alignment: .leading){
-                                    Image(systemName: "arkit")
-                                        .font(.largeTitle)
-                                        .foregroundStyle(Color.txt)
-                                    
-                                    Text(session)
-                                        .foregroundStyle(Color.txt)
-                                }.padding(15)
-                                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15))
+                                Button(action:{
+                                    selectedSession = session
+                                    showSession = true
+                                }){
+                                    VStack(alignment: .leading){
+                                        Image(systemName: "arkit")
+                                            .font(.largeTitle)
+                                            .foregroundStyle(Color.txt)
+                                        
+                                        Text(session)
+                                            .foregroundStyle(Color.txt)
+                                    }.padding(15)
+                                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15))
+                                }
+
                             }
                         }
                     }.frame(height: 100)
@@ -72,9 +80,12 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .fullScreenCover(isPresented: $showSession, content: {
+                        ARSessionView(sessionName: selectedSession)
+                    })
             }
         }
-
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
